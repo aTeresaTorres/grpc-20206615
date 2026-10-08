@@ -8,5 +8,6 @@ import saludo_pb2_grpc
 canal = grpc.insecure_channel("localhost:50051")
 stub = saludo_pb2_grpc.SaludadorStub(canal)   # el "stub" de la sesion 11, ya real
 
-respuesta = stub.SaludarUno(saludo_pb2.SaludoRequest(nombre="Ricardo"))
+respuesta = stub.SaludarUno(saludo_pb2.SaludoRequest(nombre="Teresa", matricula="20206615"))
 print(f"Cliente recibio: {respuesta.mensaje}")
+print("Fin del stream")
