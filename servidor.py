@@ -16,6 +16,9 @@ class SaludadorServicio(saludo_pb2_grpc.SaludadorServicer):
     #     return saludo_pb2.SaludoResponse(mensaje=mensaje)
     
     def SaludarUno(self, request, context):
+        if not request.matricula.isdigit():
+            context.abort(grpc.StatusCode.INVALID_ARGUMENT, f"Matricula invalida: {request.matricula}")
+        
         print(f"Llego una peticion: nombre={request.nombre}, matricula={request.matricula}")
         suma = sum(int(d) for d in request.matricula if d.isdigit())
         mensaje = f"Hola, {request.nombre}! Los digitos de tu matricula {request.matricula} suman {suma}."
